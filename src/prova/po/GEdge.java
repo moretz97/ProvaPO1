@@ -1,6 +1,13 @@
 package prova.po;
 
-public class GEdge {
-    private String c;
-    private int a;
+public class GEdge<A, T> {
+    private A weight;
+    private GNode<T> sorgente;
+    private GNode<T> destinazione;
+
+    public GEdge(A weight, GNode<T> sorgente, GNode<T> destinazione) {
+        this.weight = weight;
+        this.sorgente = sorgente;
+        this.destinazione = destinazione;
+    }
 }

@@ -4,16 +4,16 @@ public interface Graph<V,E> {
 
 //operazioni per nodi
 
-    boolean addNode(V);
+    boolean aggiungiNode(V n);
 
-    boolean deleteNode(V);
+    boolean deleteNode(V n);
 
-    GNode<V> searchNode(V);
+    boolean searchNode(V n);
 
 //operazioni per archi
 
-    boolean addEdge(GEdge<E,V>);
+    boolean addEdge(GEdge<E,V> n);
 
-    boolean removeEdge(GEdge<E,V>);
+    boolean removeEdge(GEdge<E,V> n);
 
 }

@@ -10,19 +10,17 @@ public interface Graph<V,E> {
 
     boolean searchNode(V n);
 
-    GNode<V> getNode(V i);
+    E getNode(V i);
 
     void setNode(V oldVal, V newVal);
 
-    void setNode(GNode<V> old, V newVal);
-
 //operazioni per archi
 
-    boolean addEdge(GEdge<E,V> n);
+    boolean addEdge(E n);
 
-    boolean removeEdge(GEdge<E,V> n);
+    boolean removeEdge(E n);
 
-    GEdge<E,V> getEdge(V source, V destination);
+    E getEdge(V source, V destination);
 
     void setEdge(V source, V destination, E newVal);
 

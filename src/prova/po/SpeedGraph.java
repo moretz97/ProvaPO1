@@ -3,16 +3,16 @@ package prova.po;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class MyGraph<V,E> implements Graph<V,E>,Algorithm<V,E>{
+public class SpeedGraph<V,E> implements Graph<V,E>,Algorithm<V,E>{
     private ArrayList<GNode<V>> nodi;
     private ArrayList<GEdge<E,V>> archi;
 
-    public MyGraph(){
+    public SpeedGraph(){
         nodi=new ArrayList<GNode<V>>();
         archi=new ArrayList<GEdge<E,V>>();
     }
 
-    public MyGraph(ArrayList<GNode<V>> nodi, ArrayList<GEdge<E,V>> archi){
+    public SpeedGraph(ArrayList<GNode<V>> nodi, ArrayList<GEdge<E,V>> archi){
         this.nodi=nodi;
         this.archi=archi;
     }

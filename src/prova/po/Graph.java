@@ -14,6 +14,15 @@ public interface Graph<V,E> {
 
     void setNode(V oldVal, V newVal);
 
+    int in_degree(V n);     //mi dice il numero di archi entranti
+
+    int out_degree(V n);    //mi dice il numero di archi uscenti
+
+    int degree(V n);        //mi da il grado del vertice(somma tra in_degree e out_degree)
+
+    boolean isempty();      //mi dice se un grafo è vuoto
+
+
 //operazioni per archi
 
     boolean addEdge(E n);

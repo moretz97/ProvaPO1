@@ -54,7 +54,12 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
 
     @Override
     public boolean addNode(V n) {
-        return false;
+        if (!searchNode(n)){
+            nodi.add(new GNode<>(n));
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
@@ -64,6 +69,11 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
 
     @Override
     public boolean searchNode(V n) {
+        for (int i=0;i<nodi.size();i++){
+            if(nodi.get(i).getData().equals(n)){
+                return true;
+            }
+        }
         return false;
     }
 

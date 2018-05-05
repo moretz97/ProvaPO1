@@ -6,4 +6,8 @@ public class GNode<T> {
     public GNode(T data) {
         this.data = data;
     }
+
+    public T getData(){
+        return data;
+    }
 }

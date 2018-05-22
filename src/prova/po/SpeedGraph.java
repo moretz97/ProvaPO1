@@ -2,17 +2,18 @@ package prova.po;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 public class SpeedGraph<V,E> implements Algorithm<V,E>{
-    private ArrayList<GNode<V>> nodi;
-    private ArrayList<GEdge<E,V>> archi;
+    private ArrayList<V> nodi;
+    private ArrayList<E> archi;
 
     public SpeedGraph(){
-        nodi=new ArrayList<GNode<V>>();
-        archi=new ArrayList<GEdge<E,V>>();
+        nodi=new ArrayList<V>();
+        archi=new ArrayList<E>();
     }
 
-    public SpeedGraph(ArrayList<GNode<V>> nodi, ArrayList<GEdge<E,V>> archi){
+    public SpeedGraph(ArrayList<V> nodi, ArrayList<E> archi){
         this.nodi=nodi;
         this.archi=archi;
     }
@@ -55,7 +56,7 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     @Override
     public boolean addNode(V n) {
         if (!searchNode(n)){
-            nodi.add(new GNode<>(n));
+            nodi.add(n);
             return true;
         }else{
             return false;
@@ -64,13 +65,32 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
 
     @Override
     public boolean deleteNode(V n) {
-        return false;
+        int i=0;
+        V nodo;
+        while (nodi.get(i).equals(n)){
+            i++;
+        }
+        nodo=nodi.get(i);
+        deleteEdgeWithThisNode(nodo);
+        nodi.remove(i);
+        return true;
+    }
+
+    private void deleteEdgeWithThisNode(V nodo) {
+        for (int i=0; i<nodi.size();++i){
+            if (isExistEdge(nodo,nodi.get(i))){
+                removeEdge(getEdge(nodo,nodi.get(i)));
+            }
+            if (isExistEdge(nodi.get(i),nodo)){
+                removeEdge(getEdge(nodi.get(i),nodo));
+            }
+        }
     }
 
     @Override
     public boolean searchNode(V n) {
-        for (int i=0;i<nodi.size();i++){
-            if(nodi.get(i).getData().equals(n)){
+        for (V aNodi : nodi) {
+            if (aNodi.equals(n)) {
                 return true;
             }
         }
@@ -78,8 +98,8 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     }
 
     @Override
-    public GNode<V> getNode (V data) {
-      return null;
+    public Set<V> getNode(V i) {
+        return (Set<V>) nodi;
     }
 
     @Override
@@ -121,9 +141,9 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     public E getEdge(V source, V destination) {
         int i=0;
         while (i<archi.size()){
-            if (archi.get(i).getSorgente().equals(source)){
-                if (archi.get(i).getDestinazione().equals(destination)){
-                    return archi.get(i).getWeigth();
+            if (archi.get(i).equals(source)){
+                if (archi.get(i).equals(destination)){
+                    return archi.get(i);
                 }
             }
         }
@@ -133,5 +153,15 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     @Override
     public void setEdge(V source, V destination, E newVal) {
         System.out.println("non va un casso");
+    }
+
+    @Override
+    public boolean isExistEdge(V source, V destination) {
+        for (int i=0;i<archi.size();++i){
+            if (archi.get(i).equals(getEdge(source,destination))){
+                return true;
+            }
+        }
+        return false;
     }
 }

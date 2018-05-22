@@ -1,5 +1,7 @@
 package prova.po;
 
+import java.util.Set;
+
 public interface Graph<V,E> {
 
 //operazioni per nodi
@@ -10,7 +12,7 @@ public interface Graph<V,E> {
 
     boolean searchNode(V n);
 
-    GNode<V> getNode(V data);
+    Set<V> getNode(V data);
 
     void setNode(V oldVal, V newVal);
 
@@ -32,5 +34,7 @@ public interface Graph<V,E> {
     E getEdge(V source, V destination);
 
     void setEdge(V source, V destination, E newVal);
+
+    boolean isExistEdge(V source, V destination);
 
 }

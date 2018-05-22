@@ -104,37 +104,59 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
 
     @Override
     public void setNode(V oldVal, V newVal) {
-
+        int i=0;
+        while(!nodi.get(i).equals(oldVal)){
+            i++;
+        }
+        nodi.set(i,newVal);
     }
 
     @Override
     public int in_degree(V n) {
-        return 0;
+        int degree=0;
+        for (V aNodi : nodi) {
+            if (isExistEdge(aNodi, n)) {
+                degree++;
+            }
+        }
+        return degree;
     }
 
     @Override
     public int out_degree(V n) {
-        return 0;
+        int degree=0;
+        for (V aNodi : nodi) {
+            if (isExistEdge(n, aNodi)) {
+                degree++;
+            }
+        }
+        return degree;
     }
 
     @Override
     public int degree(V n) {
-        return 0;
+        return in_degree(n)+out_degree(n);
     }
 
     @Override
-    public boolean isempty() {
-        return false;
+    public boolean isEmpty() {
+        return nodi.isEmpty();
     }
 
     @Override
     public boolean addEdge(E n) {
-        return false;
+        archi.add(n);
+        return true;
     }
 
     @Override
     public boolean removeEdge(E n) {
-        return false;
+        int i=0;
+        while (!archi.get(i).equals(n)){
+            i++;
+        }
+        archi.remove(i);
+        return true;
     }
 
     @Override
@@ -152,13 +174,17 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
 
     @Override
     public void setEdge(V source, V destination, E newVal) {
-        System.out.println("non va un casso");
+        int i=0;
+        while(!archi.get(i).equals(getEdge(source,destination))){
+            i++;
+        }
+        archi.set(i,newVal);
     }
 
     @Override
     public boolean isExistEdge(V source, V destination) {
-        for (int i=0;i<archi.size();++i){
-            if (archi.get(i).equals(getEdge(source,destination))){
+        for (E anArchi : archi) {
+            if (anArchi.equals(getEdge(source, destination))) {
                 return true;
             }
         }

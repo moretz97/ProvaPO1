@@ -22,7 +22,7 @@ public interface Graph<V,E> {
 
     int degree(V n);        //mi da il grado del vertice(somma tra in_degree e out_degree)
 
-    boolean isempty();      //mi dice se un grafo è vuoto
+    boolean isEmpty();      //mi dice se un grafo è vuoto
 
 
 //operazioni per archi

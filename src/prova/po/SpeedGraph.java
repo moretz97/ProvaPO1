@@ -132,6 +132,6 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
 
     @Override
     public void setEdge(V source, V destination, E newVal) {
-
+        System.out.println("non va un casso");
     }
 }

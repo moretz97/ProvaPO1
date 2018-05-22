@@ -78,8 +78,8 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     }
 
     @Override
-    public V getNode(V i) {
-        return null;
+    public GNode<V> getNode(GNode<V> n) {
+      return null;
     }
 
     @Override

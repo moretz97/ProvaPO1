@@ -10,7 +10,7 @@ public interface Graph<V,E> {
 
     boolean searchNode(V n);
 
-    GNode<V> getNode(GNode<V> n);
+    GNode<V> getNode(V data);
 
     void setNode(V oldVal, V newVal);
 

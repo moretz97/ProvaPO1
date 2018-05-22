@@ -1,5 +1,7 @@
 package prova.po;
 
+import javafx.beans.binding.Bindings;
+
 public class GEdge<A, T> {
     private A weight;
     private GNode<T> sorgente;
@@ -9,5 +11,17 @@ public class GEdge<A, T> {
         this.weight = weight;
         this.sorgente = sorgente;
         this.destinazione = destinazione;
+    }
+
+    public GNode<T> getSorgente() {
+        return sorgente;
+    }
+
+    public A getWeigth() {
+        return weight;
+    }
+
+    public GNode<T> getDestinazione() {
+        return destinazione;
     }
 }

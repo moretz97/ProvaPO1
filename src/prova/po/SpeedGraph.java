@@ -78,7 +78,7 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     }
 
     @Override
-    public E getNode(V i) {
+    public V getNode(V i) {
         return null;
     }
 
@@ -119,6 +119,14 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
 
     @Override
     public E getEdge(V source, V destination) {
+        int i=0;
+        while (i<archi.size()){
+            if (archi.get(i).getSorgente().equals(source)){
+                if (archi.get(i).getDestinazione().equals(destination)){
+                    return archi.get(i).getWeigth();
+                }
+            }
+        }
         return null;
     }
 

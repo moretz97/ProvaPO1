@@ -9,8 +9,8 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     private ArrayList<E> archi;
 
     public SpeedGraph(){
-        nodi=new ArrayList<V>();
-        archi=new ArrayList<E>();
+        nodi=new ArrayList<>();
+        archi=new ArrayList<>();
     }
 
     public SpeedGraph(ArrayList<V> nodi, ArrayList<E> archi){
@@ -77,12 +77,12 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     }
 
     private void deleteEdgeWithThisNode(V nodo) {
-        for (int i=0; i<nodi.size();++i){
-            if (isExistEdge(nodo,nodi.get(i))){
-                removeEdge(getEdge(nodo,nodi.get(i)));
+        for (V aNodi : nodi) {
+            if (isExistEdge(nodo, aNodi)) {
+                removeEdge(getEdge(nodo, aNodi));
             }
-            if (isExistEdge(nodi.get(i),nodo)){
-                removeEdge(getEdge(nodi.get(i),nodo));
+            if (isExistEdge(aNodi, nodo)) {
+                removeEdge(getEdge(aNodi, nodo));
             }
         }
     }

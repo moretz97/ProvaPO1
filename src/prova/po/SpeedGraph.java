@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
-public class SpeedGraph<V,E> implements Algorithm<V,E>{
+public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     private ArrayList<V> nodi;
     private ArrayList<E> archi;
 
@@ -23,6 +23,7 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     public boolean aciclico(Collection<E> v) {
         Iterator<E> it= archi.iterator();   //creo l'iteratore
         while (it.hasNext()){
+            V sorg= (V) it.next().getSorgente();
             //capire come entrare e vedere il sorgente
         }
         return false;

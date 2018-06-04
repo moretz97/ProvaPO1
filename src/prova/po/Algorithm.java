@@ -10,9 +10,9 @@ public interface Algorithm<V,E> extends Graph<V,E> {
 
     boolean isregular(Collection<V> v);     //mi dice se il grado dei vertici è uguale
 
-    int[][] build_matrix(Collection<V> v);      //mi costruisce la matrice di adiacenza dove su ogni posizione ci può essere 0 se non c'è l'arco 1 altrimenti
+    int[][] build_matrix(Collection<V> v,Collection<E> a);      //mi costruisce la matrice di adiacenza dove su ogni posizione ci può essere 0 se non c'è l'arco 1 altrimenti
 
-    boolean iscompleted(Collection<V> v, Collection<E> a);      //guarda se il grafo è completo, cioè se presi 2 vertici esiste l'arco
+    boolean iscompleted(Collection<V> v);      //guarda se il grafo è completo, cioè se presi 2 vertici esiste l'arco
 
     Graph<V,E> findST(Collection<V> v, Collection<E> a);        //mi restituisce l'albero di copertura
 

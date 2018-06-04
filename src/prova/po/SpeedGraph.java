@@ -2,6 +2,7 @@ package prova.po;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 
 public class SpeedGraph<V,E> implements Algorithm<V,E>{
@@ -20,6 +21,10 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
 
     @Override
     public boolean aciclico(Collection<E> v) {
+        Iterator<E> it= archi.iterator();   //creo l'iteratore
+        while (it.hasNext()){
+            //capire come entrare e vedere il sorgente
+        }
         return false;
     }
 
@@ -29,20 +34,56 @@ public class SpeedGraph<V,E> implements Algorithm<V,E>{
     }
 
     @Override
+    //vado a vedere se il grado di tutti i vertici è uguale
     public boolean isregular(Collection<V> v) {
-        return false;
+        ArrayList<Integer> arrayGradi= new ArrayList<Integer>();// creo array per tutti i gradi dei vertici
+        Iterator<V> it= v.iterator();   //creo l'iteratore
+        while (it.hasNext()){
+            V vertice= (V) it.next();
+            arrayGradi.add(degree(vertice));
+        }
+        if(arrayGradi.size()>0){    //guardo se la lunghezza dei gradi è > 0
+            int gradoRif=arrayGradi.get(0); //prendo il grado del primo vertice e guardo se è uguale agli altri
+            Iterator<Integer> iteratore =arrayGradi.iterator();
+            while (iteratore.hasNext()){
+                if (gradoRif != degree((V)iteratore.next())){
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public int[][] build_matrix(Collection<V> v) {
-        return new int[0][];
-    }
+    public int[][] build_matrix(Collection<V> v, Collection<E> a) {
+        int numeroVertici=v.size();
+        int[][] matriceAdiacenza = new int[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
 
+        for(int i =0; i<numeroVertici;i++){
+            for(int j=0; j<numeroVertici;j++){
+                //anche qui dovrei accedere alla sorgente e destinazione dell'arco
+            }
+        }
+
+        return matriceAdiacenza;
+    }
     @Override
-    public boolean iscompleted(Collection<V> v, Collection<E> a) {
-        return false;
+    public boolean iscompleted(Collection<V> v) {
+        int nVertici = v.size();
+        for (int i = 0; i < nVertici; i++) {
+            V nodo = nodi.get(i);
+            for (int j = 0; j < nVertici; j++) {
+                if (i != j) {
+                    if (!isExistEdge(nodo, nodi.get(j))) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
-
     @Override
     public Graph<V, E> findST(Collection<V> v, Collection<E> a) {
         return null;

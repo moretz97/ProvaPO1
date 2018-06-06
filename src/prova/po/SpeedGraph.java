@@ -24,7 +24,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         Iterator<E> it= archi.iterator();   //creo l'iteratore
         while (it.hasNext()){
             V sorg= (V) it.next().getSorgente();
-            //capire come entrare e vedere il sorgente
+
         }
         return false;
     }
@@ -59,12 +59,20 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
 
     @Override
     public int[][] build_matrix(Collection<V> v, Collection<E> a) {
-        int numeroVertici=v.size();
+        int numeroVertici=nodi.size();
         int[][] matriceAdiacenza = new int[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
 
         for(int i =0; i<numeroVertici;i++){
-            for(int j=0; j<numeroVertici;j++){
-                //anche qui dovrei accedere alla sorgente e destinazione dell'arco
+            for (int j = 0; j < numeroVertici; j++) {
+                for (E arco : archi) {
+                    if (arco.getSorgente().equals(nodi.get(i))) {
+                        if (arco.getDestinazione().equals(nodi.get(j))) {
+                            matriceAdiacenza[i][j] = 1;
+                        } else {
+                            matriceAdiacenza[i][j] = Integer.MAX_VALUE;
+                        }
+                    }
+                }
             }
         }
 
@@ -205,8 +213,8 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public E getEdge(V source, V destination) {
         int i=0;
         while (i<archi.size()){
-            if (archi.get(i).equals(source)){
-                if (archi.get(i).equals(destination)){
+            if (archi.get(i).getSorgente().equals(source)){
+                if (archi.get(i).getDestinazione().equals(destination)){
                     return archi.get(i);
                 }
             }

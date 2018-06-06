@@ -1,5 +1,7 @@
 package prova.po;
 
+import org.omg.PortableInterceptor.INACTIVE;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -8,6 +10,8 @@ import java.util.Set;
 public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     private ArrayList<V> nodi;
     private ArrayList<E> archi;
+
+    private ArrayList<Boolean> visitati;
 
     public SpeedGraph(){
         nodi=new ArrayList<>();
@@ -20,25 +24,60 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     }
 
     @Override
-    public boolean aciclico(Collection<E> v) {
-        Iterator<E> it= archi.iterator();   //creo l'iteratore
-        while (it.hasNext()){
-            V sorg= (V) it.next().getSorgente();
+    public boolean aciclico() {
+        int matriceAd[][]=build_matrix();
+        visitati=new ArrayList<>();
+        for (int i=0;i<visitati.size();++i){
+            visitati.set(i,false);
+        }
 
+        return dfsAciclico(matriceAd,0);
+    }
+
+
+    private  boolean dfsAciclico(int adjacency_matrix[][], int node)
+    {
+        ArrayList<Integer> neighbours=findNeighbours(adjacency_matrix,node);
+        visitati.set(node,true);
+        for (int i = 0; i < neighbours.size(); i++) {
+            Integer n=neighbours.get(i);
+            if(!visitati.get(n))
+            {
+                dfsAciclico(adjacency_matrix,n);
+            }
+            else{
+                return true;
+            }
         }
         return false;
     }
 
+    private ArrayList<Integer> findNeighbours(int[][] adjacency_matrix, int node) {
+
+        ArrayList<Integer> neighbours=new ArrayList<>();
+        if(node!=-1)
+        {
+            for (int j = 0; j < adjacency_matrix[node].length; j++) {
+                if(adjacency_matrix[node][j]==1)
+                {
+                    neighbours.add(j);
+                }
+            }
+        }
+        return neighbours;
+    }
+
+
     @Override
-    public boolean isconnected(Collection<V> v, Collection<E> a) {
+    public boolean isconnected() {
         return false;
     }
 
     @Override
     //vado a vedere se il grado di tutti i vertici è uguale
-    public boolean isregular(Collection<V> v) {
+    public boolean isregular() {
         ArrayList<Integer> arrayGradi= new ArrayList<Integer>();// creo array per tutti i gradi dei vertici
-        Iterator<V> it= v.iterator();   //creo l'iteratore
+        Iterator<V> it= nodi.iterator();   //creo l'iteratore
         while (it.hasNext()){
             V vertice= (V) it.next();
             arrayGradi.add(degree(vertice));
@@ -58,7 +97,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     }
 
     @Override
-    public int[][] build_matrix(Collection<V> v, Collection<E> a) {
+    public int[][] build_matrix() {
         int numeroVertici=nodi.size();
         int[][] matriceAdiacenza = new int[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
 
@@ -69,7 +108,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
                         if (arco.getDestinazione().equals(nodi.get(j))) {
                             matriceAdiacenza[i][j] = 1;
                         } else {
-                            matriceAdiacenza[i][j] = Integer.MAX_VALUE;
+                            matriceAdiacenza[i][j] = 0;
                         }
                     }
                 }
@@ -78,9 +117,10 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
 
         return matriceAdiacenza;
     }
+
     @Override
-    public boolean iscompleted(Collection<V> v) {
-        int nVertici = v.size();
+    public boolean iscompleted() {
+        int nVertici = nodi.size();
         for (int i = 0; i < nVertici; i++) {
             V nodo = nodi.get(i);
             for (int j = 0; j < nVertici; j++) {
@@ -94,12 +134,12 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return true;
     }
     @Override
-    public Graph<V, E> findST(Collection<V> v, Collection<E> a) {
+    public Graph<V, E> findST() {
         return null;
     }
 
     @Override
-    public Graph<V, E> findMST(Collection<V> v, Collection<E> a) {
+    public Graph<V, E> findMST() {
         return null;
     }
 

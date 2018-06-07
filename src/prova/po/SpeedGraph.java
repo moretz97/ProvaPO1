@@ -94,26 +94,46 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     }
 
     @Override
-    //vado a vedere se il grado di tutti i vertici è uguale
-    public boolean isregular() {
-        ArrayList<Integer> arrayGradi= new ArrayList<Integer>();// creo array per tutti i gradi dei vertici
-        Iterator<V> it= nodi.iterator();   //creo l'iteratore
-        while (it.hasNext()){
-            V vertice= (V) it.next();
-            arrayGradi.add(degree(vertice));
+    public boolean isregular(){
+        ArrayList<Integer> arrayGradiTotale= new ArrayList<>();// creo array con grado totale di tutti i vertici
+        ArrayList<Integer> arrayGradiIn= new ArrayList<>();//creo array con grado in entrata di tutti i vertici
+        ArrayList<Integer> arrayGradiOut=new ArrayList<>();//creo array con grado in uscita di tutti i vertici
+
+        //Iterator<V> it= nodi.iterator();   //creo l'iteratore(che alla fine vale per tutti)
+
+        System.out.println("SONO PASSATO QUI1");
+        int lunghezza=nodi.size();
+        System.out.println(lunghezza);
+        int k=0;
+        while(lunghezza>0){
+            arrayGradiTotale.add(degree(nodi.get(k)));
+            arrayGradiIn.add(in_degree(nodi.get(k)));
+            arrayGradiOut.add(out_degree(nodi.get(k)));
+            k++;
+            lunghezza--;
         }
-        if(arrayGradi.size()>0){    //guardo se la lunghezza dei gradi è > 0
-            int gradoRif=arrayGradi.get(0); //prendo il grado del primo vertice e guardo se è uguale agli altri
-            Iterator<Integer> iteratore =arrayGradi.iterator();
-            while (iteratore.hasNext()){
-                if (gradoRif != degree((V)iteratore.next())){
-                    return false;
+
+//        while (it.hasNext()){
+//            V vertice= (V) it.next();
+//            arrayGradiTotale.add(degree(vertice));
+//            arrayGradiIn.add(in_degree(vertice));
+//            arrayGradiOut.add(out_degree(vertice));
+//        }
+
+        System.out.println("SONO PASSATO QUI2");
+        boolean diverso=false;
+        int i=0;
+        int j=0;
+        while(!diverso && i<arrayGradiTotale.size()){
+            while (j<arrayGradiTotale.size()){
+                if(arrayGradiTotale.get(i) != arrayGradiTotale.get(j) || arrayGradiIn.get(i) != arrayGradiIn.get(j) || arrayGradiOut.get(i) != arrayGradiOut.get(j)){
+                    diverso=true;
                 }
+                j++;
             }
-        }else{
-            return false;
+            i++;
         }
-        return true;
+        return !diverso;
     }
 
     @Override
@@ -227,8 +247,10 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public int in_degree(V n) {
         int degree=0;
         for (V aNodi : nodi) {
+
             if (isExistEdge(aNodi, n)) {
                 degree++;
+
             }
         }
         return degree;
@@ -242,6 +264,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
                 degree++;
             }
         }
+
         return degree;
     }
 
@@ -296,9 +319,11 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     @Override
     public boolean isExistEdge(V source, V destination) {
         for (E anArchi : archi) {
+            System.out.println("funzia");
             if (anArchi.equals(getEdge(source, destination))) {
                 return true;
             }
+
         }
         return false;
     }

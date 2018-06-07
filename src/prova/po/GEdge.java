@@ -24,4 +24,11 @@ public class GEdge<A, T> {
     public GNode<T> getDestinazione() {
         return destinazione;
     }
+
+    @Override
+    public String toString() {
+        String stringa = new String();
+        stringa= stringa+getSorgente()+getDestinazione();
+        return stringa;
+    }
 }

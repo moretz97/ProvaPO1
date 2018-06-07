@@ -36,6 +36,12 @@ public class Main {
         System.out.println("\nGRAFO");
         System.out.println(grafo.toString());
         //---------------------------------------------------------------------------
-        System.out.println("ACICLICO-->"+grafo.aciclico());
+        //System.out.println("ACICLICO-->"+grafo.aciclico());
+        //System.out.println("REGOLARE-->"+grafo.isregular());
+        //System.out.println("COMPLETO-->"+grafo.iscompleted());
+        GNode<Integer> nodo1 = new GNode<>(1);
+        GNode<Integer> nodo2 = new GNode<>(2);
+        GEdge<Integer,Integer> arcoProva= grafo.getEdge(nodo1,nodo2);
+        System.out.println("ARCO-->"+arcoProva.toString());
     }
 }

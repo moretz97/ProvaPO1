@@ -124,28 +124,15 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         ArrayList<Integer> arrayGradiIn= new ArrayList<>();//creo array con grado in entrata di tutti i vertici
         ArrayList<Integer> arrayGradiOut=new ArrayList<>();//creo array con grado in uscita di tutti i vertici
 
-        //Iterator<V> it= nodi.iterator();   //creo l'iteratore(che alla fine vale per tutti)
+        Iterator<V> it= nodi.iterator();   //creo l'iteratore(che alla fine vale per tutti)
 
-        System.out.println("SONO PASSATO QUI1");
-        int lunghezza=nodi.size();
-        System.out.println(lunghezza);
-        int k=0;
-        while(lunghezza>0){
-            arrayGradiTotale.add(degree(nodi.get(k)));
-            arrayGradiIn.add(in_degree(nodi.get(k)));
-            arrayGradiOut.add(out_degree(nodi.get(k)));
-            k++;
-            lunghezza--;
+        while (it.hasNext()){
+            V vertice= (V) it.next();
+            arrayGradiTotale.add(degree(vertice));
+            arrayGradiIn.add(in_degree(vertice));
+            arrayGradiOut.add(out_degree(vertice));
         }
 
-//        while (it.hasNext()){
-//            V vertice= (V) it.next();
-//            arrayGradiTotale.add(degree(vertice));
-//            arrayGradiIn.add(in_degree(vertice));
-//            arrayGradiOut.add(out_degree(vertice));
-//        }
-
-        System.out.println("SONO PASSATO QUI2");
         boolean diverso=false;
         int i=0;
         int j=0;
@@ -289,7 +276,6 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
                 degree++;
             }
         }
-
         return degree;
     }
 

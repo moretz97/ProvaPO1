@@ -28,7 +28,7 @@ public class Main {
         grafo.addEdge(arco2);
         GEdge<Integer,Integer> arco3= new GEdge<>(6,nodi.get(3),nodi.get(4));
         grafo.addEdge(arco3);
-        GEdge<Integer,Integer> arco4= new GEdge<>(6,nodi.get(0),nodi.get(4));
+        GEdge<Integer,Integer> arco4= new GEdge<>(6,nodi.get(4),nodi.get(0));
         grafo.addEdge(arco4);
         //---------------------------------------------------------------------------
 
@@ -37,7 +37,9 @@ public class Main {
         System.out.println(grafo);
         //---------------------------------------------------------------------------
         //System.out.println("ACICLICO-->"+grafo.aciclico());
-        //System.out.println("REGOLARE-->"+grafo.isregular());
+        System.out.println("REGOLARE-->"+grafo.isregular());
+        GNode<Integer> nodo1 = new GNode<>(1);
+        System.out.println(grafo.out_degree(nodo1));
         //System.out.println("COMPLETO-->"+grafo.iscompleted());
         //GNode<Integer> nodo1 = new GNode<>(1);
         //GNode<Integer> nodo2 = new GNode<>(2);

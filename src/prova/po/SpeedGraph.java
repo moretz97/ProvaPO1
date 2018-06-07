@@ -303,6 +303,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
                     return archi.get(i);
                 }
             }
+            i++;
         }
         return null;
     }

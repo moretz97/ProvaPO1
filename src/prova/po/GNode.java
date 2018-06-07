@@ -17,4 +17,13 @@ public class GNode<T> {
         stringa=(data.toString());
         return stringa;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof GNode) {
+            return ((GNode) obj).data.equals(this.data);
+        }else{
+            return false;
+        }
+    }
 }

@@ -28,7 +28,8 @@ public class GEdge<A, T> {
     @Override
     public String toString() {
         String stringa = new String();
-        stringa= stringa+getSorgente()+getDestinazione();
+        stringa= stringa+getSorgente()+" "+getDestinazione();
         return stringa;
     }
+
 }

@@ -22,7 +22,7 @@ public class Main {
         //----------INSERIMENTO ARCHI NEL GRAFO-------------------------------------
         GEdge<Integer,Integer> arco= new GEdge<>(6,nodi.get(0),nodi.get(1));
         grafo.addEdge(arco);
-        GEdge<Integer,Integer> arco1= new GEdge<>(6,nodi.get(1),nodi.get(2));
+        GEdge<Integer,Integer> arco1= new GEdge<>(6,nodi.get(1),nodi.get(0));
         grafo.addEdge(arco1);
         GEdge<Integer,Integer> arco2= new GEdge<>(6,nodi.get(2),nodi.get(3));
         grafo.addEdge(arco2);
@@ -34,7 +34,7 @@ public class Main {
 
         //---------------STAMPA DEL GRAFO--------------------------------------------
         System.out.println("\nGRAFO");
-        System.out.println(grafo.toString());
+        System.out.println(grafo);
         //---------------------------------------------------------------------------
         //System.out.println("ACICLICO-->"+grafo.aciclico());
         //System.out.println("REGOLARE-->"+grafo.isregular());

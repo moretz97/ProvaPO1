@@ -14,22 +14,26 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public SpeedGraph(){
         nodi=new ArrayList<>();
         archi=new ArrayList<>();
+        visitati=new ArrayList<>();
     }
 
     public SpeedGraph(ArrayList<V> nodi, ArrayList<E> archi){
         this.nodi=nodi;
         this.archi=archi;
+        visitati=new ArrayList<>();
     }
 
     @Override
-    public String toString() {
-        Iterator<V> it= nodi.iterator();
-        int i=1;
-        String stringa= new String();
-        while (it.hasNext()){
-            String stringa2=new String("Nodo("+i+")="+it.next().toString());
-            stringa=stringa+stringa2;
-            i++;
+    public String toString(){
+        int matrice [][];
+        matrice=this.build_matrix();
+        String stringa=new String();
+
+        for(int i=0;i<matrice[0].length;i++){
+            for (int j=0;j<matrice[0].length;j++){
+                stringa=stringa+matrice[i][j]+" ";
+            }
+            stringa= stringa+"\n";
         }
         return stringa;
     }

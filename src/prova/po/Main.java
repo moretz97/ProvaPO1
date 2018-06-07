@@ -19,10 +19,10 @@ public class Main {
         System.out.print("Nodi del grafo=");
         System.out.println(nodi.toString());
 
-        //----------INSERIMENTO ARCHI NEL GRAFO-------------------------------------
+        //----------------INSERIMENTO ARCHI NEL GRAFO-------------------------------
         GEdge<Integer,Integer> arco= new GEdge<>(6,nodi.get(0),nodi.get(1));
         grafo.addEdge(arco);
-        GEdge<Integer,Integer> arco1= new GEdge<>(6,nodi.get(1),nodi.get(0));
+        GEdge<Integer,Integer> arco1= new GEdge<>(6,nodi.get(1),nodi.get(2));
         grafo.addEdge(arco1);
         GEdge<Integer,Integer> arco2= new GEdge<>(6,nodi.get(2),nodi.get(3));
         grafo.addEdge(arco2);
@@ -38,8 +38,8 @@ public class Main {
         //---------------------------------------------------------------------------
         //System.out.println("ACICLICO-->"+grafo.aciclico());
         System.out.println("REGOLARE-->"+grafo.isregular());
-        GNode<Integer> nodo1 = new GNode<>(1);
-        System.out.println(grafo.out_degree(nodo1));
+        //GNode<Integer> nodo1 = new GNode<>(1);
+        //System.out.println(grafo.out_degree(nodo1));
         //System.out.println("COMPLETO-->"+grafo.iscompleted());
         //GNode<Integer> nodo1 = new GNode<>(1);
         //GNode<Integer> nodo2 = new GNode<>(2);

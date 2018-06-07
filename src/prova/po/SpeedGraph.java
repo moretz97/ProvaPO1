@@ -140,6 +140,8 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
             while (j<arrayGradiTotale.size()){
                 if(arrayGradiTotale.get(i) != arrayGradiTotale.get(j) || arrayGradiIn.get(i) != arrayGradiIn.get(j) || arrayGradiOut.get(i) != arrayGradiOut.get(j)){
                     diverso=true;
+                    System.out.println(arrayGradiTotale.get(i).toString()+"toti");
+                    System.out.println(arrayGradiTotale.get(j).toString()+"totj");
                 }
                 j++;
             }

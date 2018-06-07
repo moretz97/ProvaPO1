@@ -1,9 +1,7 @@
 package prova.po;
 
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -21,6 +19,19 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public SpeedGraph(ArrayList<V> nodi, ArrayList<E> archi){
         this.nodi=nodi;
         this.archi=archi;
+    }
+
+    @Override
+    public String toString() {
+        Iterator<V> it= nodi.iterator();
+        int i=1;
+        String stringa= new String();
+        while (it.hasNext()){
+            String stringa2=new String("Nodo("+i+")="+it.next().toString());
+            stringa=stringa+stringa2;
+            i++;
+        }
+        return stringa;
     }
 
     @Override
@@ -55,15 +66,12 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     private ArrayList<Integer> findNeighbours(int[][] adjacency_matrix, int node) {
 
         ArrayList<Integer> neighbours=new ArrayList<>();
-        if(node!=-1)
-        {
-            for (int j = 0; j < adjacency_matrix[node].length; j++) {
-                if(adjacency_matrix[node][j]==1)
-                {
-                    neighbours.add(j);
-                }
+        for (int j = 0; j < adjacency_matrix[node].length; j++) {
+            if(adjacency_matrix[node][j]==1){
+                neighbours.add(j);
             }
         }
+
         return neighbours;
     }
 
@@ -188,8 +196,8 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     }
 
     @Override
-    public Set<V> getNode(V i) {
-        return (Set<V>) nodi;
+    public ArrayList<V> getAllNode() {
+        return (ArrayList<V>) nodi;
     }
 
     @Override

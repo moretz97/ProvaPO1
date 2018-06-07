@@ -1,5 +1,6 @@
 package prova.po;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public interface Graph<V,E> {
@@ -12,7 +13,7 @@ public interface Graph<V,E> {
 
     boolean searchNode(V n);
 
-    Set<V> getNode(V data);
+    ArrayList<V> getAllNode();
 
     void setNode(V oldVal, V newVal);
 

@@ -10,4 +10,11 @@ public class GNode<T> {
     public T getData(){
         return data;
     }
+
+    @Override
+    public String toString() {
+        String stringa = new String();
+        stringa=(data.toString());
+        return stringa;
+    }
 }

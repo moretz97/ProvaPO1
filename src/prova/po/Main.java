@@ -28,7 +28,7 @@ public class Main {
         grafo.addEdge(arco2);
         GEdge<Integer,Integer> arco3= new GEdge<>(6,nodi.get(3),nodi.get(4));
         grafo.addEdge(arco3);
-        GEdge<Integer,Integer> arco4= new GEdge<>(6,nodi.get(4),nodi.get(0));
+        GEdge<Integer,Integer> arco4= new GEdge<>(6,nodi.get(0),nodi.get(4));
         grafo.addEdge(arco4);
         //---------------------------------------------------------------------------
 

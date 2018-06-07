@@ -24,8 +24,8 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
 
     @Override
     public String toString(){
-        int matrice [][];
-        matrice=this.build_matrix();
+        String matrice [][];
+        matrice=this.build_matrixString();
         String stringa=new String();
 
         for(int i=-1;i<matrice[0].length;i++) {
@@ -44,6 +44,31 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
             stringa = stringa + "\n";
         }
         return stringa;
+    }
+
+    public String[][] build_matrixString() {
+        int numeroVertici=nodi.size();
+        String[][] matriceAdiacenza = new String[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
+
+        for(int i =0; i<numeroVertici;i++){
+            for (int j = 0; j < numeroVertici; j++) {
+                for (E arco : archi) {
+                    String stringa;
+                    stringa= arco.getWeigth().toString();
+                    if (arco.getSorgente().equals(nodi.get(i))) {
+                        if (arco.getDestinazione().equals(nodi.get(j))) {
+                            matriceAdiacenza[i][j] = stringa;
+                        } else {
+                            if (matriceAdiacenza[i][j]!=stringa) {
+                                matriceAdiacenza[i][j] = "*";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return matriceAdiacenza;
     }
 
     @Override
@@ -137,7 +162,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     }
 
     @Override
-     public int[][] build_matrix() {
+    public int[][] build_matrix() {
         int numeroVertici=nodi.size();
         int[][] matriceAdiacenza = new int[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
 
@@ -320,9 +345,9 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     @Override
     public boolean isExistEdge(V source, V destination) {
         for (E anArchi : archi) {
-            System.out.println("funzia");
             if (anArchi.equals(getEdge(source, destination))) {
                 return true;
+
             }
 
         }

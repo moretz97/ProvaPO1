@@ -20,7 +20,6 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public SpeedGraph(ArrayList<V> nodi, ArrayList<E> archi){
         this.nodi=nodi;
         this.archi=archi;
-        visitati=new ArrayList<>();
     }
 
     @Override
@@ -42,8 +41,8 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public boolean aciclico() {
         int matriceAd[][]=build_matrix();
         visitati=new ArrayList<>();
-        for (int i=0;i<visitati.size();++i){
-            visitati.set(i,false);
+        for (int i=0;i<nodi.size();++i){
+            visitati.add(false);
         }
 
         return dfsAciclico(matriceAd,0);

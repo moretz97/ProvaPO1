@@ -128,7 +128,9 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
                         if (arco.getDestinazione().equals(nodi.get(j))) {
                             matriceAdiacenza[i][j] = 1;
                         } else {
-                            matriceAdiacenza[i][j] = 0;
+                            if (matriceAdiacenza[i][j]!=1) {
+                                matriceAdiacenza[i][j] = 0;
+                            }
                         }
                     }
                 }

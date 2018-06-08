@@ -14,17 +14,5 @@ public interface Algorithm<V,E> extends Graph<V,E> {
 
     boolean iscompleted();      //guarda se il grafo è completo, cioè se presi 2 vertici esiste l'arco
 
-    Graph<V,E> findST();        //mi restituisce l'albero di copertura
-
-    Graph<V,E> findMST();       //mi restituisce l'albero di copertura minimo (Guardare algoritmo ASD e vedere se implementare metodi nuovi)
-
-
-    //METODI DA CAPIRE SE FARE O MENO CON UN ALTRA LIBRERIA E NUOVE STRUTTURE PER NODI E ARCHI
-
-    //Graph<V,E> kruskall_algorithm();
-    //Graph<V,E> prim_algorithm();
-    //Graph<V,E> dijkstra_algorithm();
-
-
 
 }

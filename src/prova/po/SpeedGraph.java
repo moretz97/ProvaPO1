@@ -20,6 +20,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public SpeedGraph(ArrayList<V> nodi, ArrayList<E> archi){
         this.nodi=nodi;
         this.archi=archi;
+        visitati=new ArrayList<>();
     }
 
     @Override
@@ -46,7 +47,13 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return stringa;
     }
 
-    public String[][] build_matrixString() {
+    private void azzeraVisitati (){
+        for(int i=0;i<nodi.size();i++){
+            visitati.add(false);
+        }
+    }
+
+    private String[][] build_matrixString() {
         int numeroVertici=nodi.size();
         String[][] matriceAdiacenza = new String[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
         String stringa="*";
@@ -56,7 +63,6 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
                 matriceAdiacenza[i][j]="";
             }
         }
-
         for(int i =0; i<numeroVertici;i++){
             for (int j = 0; j < numeroVertici; j++) {
                 for (E arco : archi) {
@@ -73,19 +79,16 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
                 }
             }
         }
-
         return matriceAdiacenza;
     }
 
     @Override
     public boolean aciclico() {
         int matriceAd[][]=build_matrix();
-        visitati=new ArrayList<>();
-        for (int i=0;i<nodi.size();++i){
-            visitati.add(false);
-        }
-
-        return dfsAciclico(matriceAd,0);
+        azzeraVisitati();
+        boolean ris=dfsAciclico(matriceAd,0);
+        visitati.clear();
+        return ris;
     }
 
 
@@ -118,11 +121,24 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return neighbours;
     }
 
+    private  void dfs(int adjacency_matrix[][], int node)
+    {
+        ArrayList<Integer> neighbours=findNeighbours(adjacency_matrix,node);
+        visitati.set(node,true);
+        for (int i = 0; i < neighbours.size(); i++) {
+            Integer n=neighbours.get(i);
+            if(!visitati.get(n))
+            {
+                dfs(adjacency_matrix,n);
+            }
+        }
+    }
 
     @Override
     public boolean isconnected() {
-        return false;
+        return this.iscompleted();
     }
+
 
     @Override
     public boolean isregular(){
@@ -188,15 +204,6 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
             }
         }
         return true;
-    }
-    @Override
-    public Graph<V, E> findST() {
-        return null;
-    }
-
-    @Override
-    public Graph<V, E> findMST() {
-        return null;
     }
 
     @Override

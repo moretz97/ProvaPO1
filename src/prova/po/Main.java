@@ -20,8 +20,8 @@ public class Main {
         grafo2.addNode(nodo1);
         grafo2.addNode(nodo2);
         grafo2.addNode(nodo3);
-        //GEdge<Integer,Integer> arco01= new GEdge<>(6,nodo1,nodo2);
-        //grafo2.addEdge(arco01);
+        GEdge<Integer,Integer> arco01= new GEdge<>(6,nodo1,nodo2);
+        grafo2.addEdge(arco01);
         GEdge<Integer,Integer> arco02= new GEdge<>(6,nodo2,nodo1);
         grafo2.addEdge(arco02);
         GEdge<Integer,Integer> arco03= new GEdge<>(6,nodo2,nodo3);
@@ -30,8 +30,16 @@ public class Main {
         grafo2.addEdge(arco04);
         GEdge<Integer,Integer> arco05= new GEdge<>(6,nodo1,nodo3);
         grafo2.addEdge(arco05);
-        //GEdge<Integer,Integer> arco06= new GEdge<>(6,nodo3,nodo1);
-        //grafo2.addEdge(arco06);
+        GEdge<Integer,Integer> arco06= new GEdge<>(6,nodo3,nodo1);
+        grafo2.addEdge(arco06);
+
+        GNode<Integer> nodo4 = new GNode<>(4);
+
+        try {
+            grafo2.deleteNode(nodo4);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("GRAFO2");
         System.out.println(grafo2);

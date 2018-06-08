@@ -9,7 +9,7 @@ public interface Graph<V,E> {
 
     boolean addNode(V n);
 
-    boolean deleteNode(V n);
+    boolean deleteNode(V n) throws NotFoundException;
 
     boolean searchNode(V n);
 
@@ -30,7 +30,7 @@ public interface Graph<V,E> {
 
     boolean addEdge(E n);
 
-    boolean removeEdge(E n);
+    boolean removeEdge(E n) throws NotFoundException;
 
     E getEdge(V source, V destination);
 

@@ -218,19 +218,25 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
 
 
     @Override
-    public boolean deleteNode(V n) {
+    public boolean deleteNode(V n) throws NotFoundException {
         int i=0;
         V nodo;
-        while (nodi.get(i).equals(n)){
+        while (!nodi.get(i).equals(n)){
             i++;
+            if(nodi.size() <= i) {
+                throw new NotFoundException();
+            }
         }
-        nodo=nodi.get(i);
-        deleteEdgeWithThisNode(nodo);
-        nodi.remove(i);
-        return true;
+
+            nodo=nodi.get(i);
+            deleteEdgeWithThisNode(nodo);
+            nodi.remove(i);
+            return true;
+
+
     }
 
-    private void deleteEdgeWithThisNode(V nodo) {
+    private void deleteEdgeWithThisNode(V nodo) throws NotFoundException {
         for (V aNodi : nodi) {
             if (isExistEdge(nodo, aNodi)) {
                 removeEdge(getEdge(nodo, aNodi));
@@ -306,10 +312,13 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     }
 
     @Override
-    public boolean removeEdge(E n) {
+    public boolean removeEdge(E n) throws NotFoundException {
         int i=0;
         while (!archi.get(i).equals(n)){
             i++;
+            if(archi.size() <= i) {
+                throw new NotFoundException();
+            }
         }
         archi.remove(i);
         return true;

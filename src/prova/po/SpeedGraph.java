@@ -49,7 +49,13 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public String[][] build_matrixString() {
         int numeroVertici=nodi.size();
         String[][] matriceAdiacenza = new String[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
-        String stringa="";
+        String stringa="*";
+
+        for (int i=0;i<numeroVertici;i++){
+            for (int j=0;j<numeroVertici;j++){
+                matriceAdiacenza[i][j]="";
+            }
+        }
 
         for(int i =0; i<numeroVertici;i++){
             for (int j = 0; j < numeroVertici; j++) {
@@ -59,9 +65,8 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
                             stringa= arco.getWeigth().toString();
                             matriceAdiacenza[i][j] = stringa;
                         } else {
-                            if (matriceAdiacenza[i][j]!=stringa) {
+                            if (!matriceAdiacenza[i][j].equals(stringa)) {
                                 matriceAdiacenza[i][j] = "*";
-                                stringa="*";
                             }
                         }
                     }

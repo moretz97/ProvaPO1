@@ -3,7 +3,6 @@ package prova.po;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     private ArrayList<V> nodi;
@@ -53,6 +52,10 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         }
     }
 
+    //---------------------------IMPLEMENTAZIONE OPERAZIONI GRAFO--------------------------
+    /*
+    * Costruisce la matrice di adiacenza con le stringhe mettendo il peso dell'arco se esso esiste altrimenti *
+    * */
     private String[][] build_matrixString() {
         int numeroVertici=nodi.size();
         String[][] matriceAdiacenza = new String[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
@@ -82,6 +85,9 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return matriceAdiacenza;
     }
 
+    /*
+    * Va a verificare se il grafo in questione è aciclico. Se lo è allora restituisce true altrimenti false
+    * */
     @Override
     public boolean aciclico() {
         int matriceAd[][]=build_matrix();
@@ -91,7 +97,9 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return ris;
     }
 
-
+    /*
+    * Mi va ad effettuare la visita dfs sul grafo
+    * */
     private  boolean dfsAciclico(int adjacency_matrix[][], int node)
     {
         ArrayList<Integer> neighbours=findNeighbours(adjacency_matrix,node);
@@ -109,6 +117,9 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return false;
     }
 
+    /*
+    * Mi va restituisce un ArrayList con tutti i vicini del nodo passato
+    * */
     private ArrayList<Integer> findNeighbours(int[][] adjacency_matrix, int node) {
 
         ArrayList<Integer> neighbours=new ArrayList<>();
@@ -121,25 +132,18 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return neighbours;
     }
 
-    private  void dfs(int adjacency_matrix[][], int node)
-    {
-        ArrayList<Integer> neighbours=findNeighbours(adjacency_matrix,node);
-        visitati.set(node,true);
-        for (int i = 0; i < neighbours.size(); i++) {
-            Integer n=neighbours.get(i);
-            if(!visitati.get(n))
-            {
-                dfs(adjacency_matrix,n);
-            }
-        }
-    }
-
+    /*
+    * Mi va a dire se il grafo in questione è connesso
+    * */
     @Override
     public boolean isconnected() {
         return this.iscompleted();
     }
 
-
+    /*
+    * Mi dice se un grafo è regolare cioè se tutti i gradi dei vertici sono uguali.
+    * Essendo nel nostro caso un grafo orientato devo vedere anche che siano uguali anche i gradi dei vertici in entrata e in uscita
+    * */
     @Override
     public boolean isregular(){
         ArrayList<Integer> arrayGradiTotale= new ArrayList<>();// creo array con grado totale di tutti i vertici
@@ -170,6 +174,9 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return !diverso;
     }
 
+    /*
+    * Mi va a costruire la matrice di adiacenza del grafo in questione (matrice di interi dove metto 0 se non c'è l'arco e 1 altrimenti)
+    * */
     @Override
     public int[][] build_matrix() {
         int numeroVertici=nodi.size();
@@ -194,6 +201,9 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return matriceAdiacenza;
     }
 
+    /*
+    * Mi va a dire se il grafo è completo, cioè se presi 2 vertici esiste un arco
+    * */
     @Override
     public boolean iscompleted() {
         int nVertici = nodi.size();
@@ -206,6 +216,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return true;
     }
 
+    //---------------------IMPLEMENTAZIONE OPERAZIONI NODI--------------------------------
     @Override
     public boolean addNode(V n) {
         if (!searchNode(n)){
@@ -236,19 +247,9 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
 
     }
 
-    private void deleteEdgeWithThisNode(V nodo) throws NotFoundException {
-        for (V aNodi : nodi) {
-            if (isExistEdge(nodo, aNodi)) {
-                removeEdge(getEdge(nodo, aNodi));
-            }
-            if (isExistEdge(aNodi, nodo)) {
-                removeEdge(getEdge(aNodi, nodo));
-            }
-        }
-    }
 
     @Override
-    public boolean searchNode(V n) {
+    public boolean searchNode(V n){
         for (V aNodi : nodi) {
             if (aNodi.equals(n)) {
                 return true;
@@ -263,10 +264,13 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     }
 
     @Override
-    public void setNode(V oldVal, V newVal) {
+    public void setNode(V oldVal, V newVal) throws NotFoundException {
         int i=0;
         while(!nodi.get(i).equals(oldVal)){
             i++;
+            if(nodi.size() <= i) {
+                throw new NotFoundException();
+            }
         }
         nodi.set(i,newVal);
     }
@@ -305,6 +309,17 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         return nodi.isEmpty();
     }
 
+    //--------------------------IMPLEMENTAZIONE OPERAZIONI ARCHI--------------------------
+    private void deleteEdgeWithThisNode(V nodo) throws NotFoundException {
+        for (V aNodi : nodi) {
+            if (isExistEdge(nodo, aNodi)) {
+                removeEdge(getEdge(nodo, aNodi));
+            }
+            if (isExistEdge(aNodi, nodo)) {
+                removeEdge(getEdge(aNodi, nodo));
+            }
+        }
+    }
     @Override
     public boolean addEdge(E n) {
         archi.add(n);
@@ -339,10 +354,13 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     }
 
     @Override
-    public void setEdge(V source, V destination, E newVal) {
+    public void setEdge(V source, V destination, E newVal) throws NotFoundException {
         int i=0;
         while(!archi.get(i).equals(getEdge(source,destination))){
             i++;
+            if(archi.size() <= i) {
+                throw new NotFoundException();
+            }
         }
         archi.set(i,newVal);
     }

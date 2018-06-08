@@ -216,6 +216,7 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         }
     }
 
+
     @Override
     public boolean deleteNode(V n) {
         int i=0;

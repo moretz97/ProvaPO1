@@ -49,18 +49,19 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
     public String[][] build_matrixString() {
         int numeroVertici=nodi.size();
         String[][] matriceAdiacenza = new String[numeroVertici][numeroVertici]; //creo una matrice n*n dove n sono i numeri dei vertici
+        String stringa="";
 
         for(int i =0; i<numeroVertici;i++){
             for (int j = 0; j < numeroVertici; j++) {
                 for (E arco : archi) {
-                    String stringa;
-                    stringa= arco.getWeigth().toString();
                     if (arco.getSorgente().equals(nodi.get(i))) {
                         if (arco.getDestinazione().equals(nodi.get(j))) {
+                            stringa= arco.getWeigth().toString();
                             matriceAdiacenza[i][j] = stringa;
                         } else {
                             if (matriceAdiacenza[i][j]!=stringa) {
                                 matriceAdiacenza[i][j] = "*";
+                                stringa="*";
                             }
                         }
                     }
@@ -140,8 +141,6 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
             while (j<arrayGradiTotale.size()){
                 if(arrayGradiTotale.get(i) != arrayGradiTotale.get(j) || arrayGradiIn.get(i) != arrayGradiIn.get(j) || arrayGradiOut.get(i) != arrayGradiOut.get(j)){
                     diverso=true;
-                    System.out.println(arrayGradiTotale.get(i).toString()+"toti");
-                    System.out.println(arrayGradiTotale.get(j).toString()+"totj");
                 }
                 j++;
             }
@@ -179,12 +178,8 @@ public class SpeedGraph<V,E extends GEdge> implements Algorithm<V,E>{
         int nVertici = nodi.size();
         for (int i = 0; i < nVertici; i++) {
             V nodo = nodi.get(i);
-            for (int j = 0; j < nVertici; j++) {
-                if (i != j) {
-                    if (!isExistEdge(nodo, nodi.get(j))) {
-                        return false;
-                    }
-                }
+            if(out_degree(nodo) != nVertici-1){
+                return false;
             }
         }
         return true;

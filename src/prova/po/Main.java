@@ -7,13 +7,37 @@ public class Main {
     public static void main(String[] args) {
         //creazione dello SpeedGraph
         SpeedGraph<GNode<Integer>,GEdge<Integer,Integer>> grafo = new SpeedGraph<>();
-
+        SpeedGraph<GNode<Integer>,GEdge<Integer,Integer>> grafo2 = new SpeedGraph<>();
         //riempimento dei nodi sullo SpeedGraph creato
         for(int i=1; i<=5;i++){
             Integer elem= i;
             GNode<Integer> nodo = new GNode<>(elem);
             grafo.addNode(nodo);
         }
+        GNode<Integer> nodo1 = new GNode<>(1);
+        GNode<Integer> nodo2 = new GNode<>(2);
+        GNode<Integer> nodo3 = new GNode<>(3);
+        grafo2.addNode(nodo1);
+        grafo2.addNode(nodo2);
+        grafo2.addNode(nodo3);
+        GEdge<Integer,Integer> arco01= new GEdge<>(6,nodo1,nodo2);
+        grafo2.addEdge(arco01);
+        GEdge<Integer,Integer> arco02= new GEdge<>(6,nodo2,nodo1);
+        grafo2.addEdge(arco02);
+        GEdge<Integer,Integer> arco03= new GEdge<>(6,nodo2,nodo3);
+        grafo2.addEdge(arco03);
+        GEdge<Integer,Integer> arco04= new GEdge<>(6,nodo3,nodo2);
+        grafo2.addEdge(arco04);
+        GEdge<Integer,Integer> arco05= new GEdge<>(6,nodo1,nodo3);
+        grafo2.addEdge(arco05);
+        GEdge<Integer,Integer> arco06= new GEdge<>(6,nodo3,nodo1);
+        grafo2.addEdge(arco06);
+
+        System.out.println("GRAFO2");
+        System.out.println(grafo2);
+        System.out.println("COMPLETO-->"+grafo2.iscompleted());
+
+
         //vado a crearmi un ArrayList dove mi salvo tutti nodi del grafo e li stampo
         ArrayList<GNode<Integer>> nodi=grafo.getAllNode();
         System.out.print("Nodi del grafo=");
@@ -40,7 +64,7 @@ public class Main {
         System.out.println("REGOLARE-->"+grafo.isregular());
         //GNode<Integer> nodo1 = new GNode<>(1);
         //System.out.println(grafo.out_degree(nodo1));
-        //System.out.println("COMPLETO-->"+grafo.iscompleted());
+        System.out.println("COMPLETO-->"+grafo.iscompleted());
         //GNode<Integer> nodo1 = new GNode<>(1);
         //GNode<Integer> nodo2 = new GNode<>(2);
         //GEdge<Integer,Integer> arcoProva= grafo.getEdge(nodo1,nodo2);
